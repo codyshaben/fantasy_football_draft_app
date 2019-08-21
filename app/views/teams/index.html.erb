@@ -2,7 +2,7 @@
 
 <div>
 <% @teams.each do |team| %>
-  <p><%= team.name %></p>
+  <p><%= link_to team.name, players_path %></p>
 <% end %>
 
 </div>

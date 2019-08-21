@@ -14,12 +14,23 @@
  *= require_self
  */
 
+ header {
+    font-family: Copperplate;
+    font-size: 50px;
+    background-color: hsl(30, 40, 50);
+    padding: 5px
+ }
 
  .nav-list {
-     display: flex;
+     margin-top: 10px;
      justify-content: flex-end
  }
 
- .nav-list {
-     margin: 12px;
+ .body {
+     font-family: Copperplate;
+     font-size: 15px;
+     background-image: url("https://cdn7.dissolve.com/p/D1028_97_095/D1028_97_095_1200.jpg")
  }
+
+
+ 

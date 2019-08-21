@@ -12,6 +12,9 @@ class UsersController < ApplicationController
       flash[:alert] = "Username already exists."
       render :new
     end
+
+    def home
+    end
   end
 
   private
