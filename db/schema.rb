@@ -12,6 +12,23 @@
 
 ActiveRecord::Schema.define(version: 2019_08_20_224254) do
 
+  create_table "player_data", force: :cascade do |t|
+    t.string "name"
+    t.integer "yards"
+    t.integer "touchdowns"
+    t.integer "rank"
+    t.string "position"
+    t.integer "comb"
+    t.float "sacks"
+    t.integer "intercepts"
+    t.integer "fg_m"
+    t.integer "fg_att"
+    t.string "a_m"
+    t.boolean "owned"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "players", force: :cascade do |t|
     t.string "name"
     t.integer "yards"

@@ -1,0 +1,2 @@
+class PlayerDatum < ApplicationRecord
+end
