@@ -1,0 +1,99 @@
+<h1><%= 'This is the add page' %></h1><br>
+
+<% ranked_players = PlayerDatum.order(rank: :asc) %>
+
+<style>
+
+th {
+    background: #336B87;
+}
+
+tr {
+    background: #f3f3f3;
+}
+
+tr:nth-child(even) {
+    background: #E6F5FF;
+}
+
+.container {
+    min-width: 400px;
+    border-collapse: collapse;
+    font-size: 1.3em;
+    text-align: left;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+}
+
+.container thead tr{
+    background-color: lightblue;
+     color: white;
+    font-weight: bold;
+    text-align: left;
+}
+
+.container th, .container td {
+    padding: 12px 15px;
+}
+
+.container tbody tr {
+    border-bottom: 1px solid lightgrey;
+}
+
+.container tbody tr:last-of-type {
+    border-bottom: 2px solid lightgrey;
+}
+
+.add_submit {
+    height: 50px;
+    border: 1px solid #f3f3f3;
+    background-color: #ffffff;
+    border-radius: 5px 5px 5px 5px;
+    position: relative;
+}
+ 
+
+
+</style>
+
+<% i = 0 %>
+    <table style="width:90%; margin-right: auto; margin-left: auto;" class="container">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Yards</th>
+                <th>Touchdowns</th>
+                <th>Comb</th>
+                <th>FGM</th>
+                <th>FG Att</th>
+                <th>A-M</th>
+                <th>Add To Roster</th>
+            </tr>
+        </thead>
+        <tbody>
+        <%while i < 100%>
+            <tr>
+                <td><%= i+1 %></td>       
+                <td class="sever"><%= ranked_players[i].rank %></td>       
+                <td><%= ranked_players[i].name %></td>
+                <td><%= ranked_players[i].position %></td>
+                <td><%= ranked_players[i].yards %></td>
+                <td><%= ranked_players[i].touchdowns %></td>           
+                <td><%= ranked_players[i].comb %></td>
+                <td><%= ranked_players[i].fg_m %></td>
+                <td><%= ranked_players[i].fg_att %></td> 
+                <td><%= ranked_players[i].a_m %></td>
+                <td>
+                    <%=form_for :player do |f|%>
+                        <input type="hidden" name= "id" value=<%=ranked_players[i].id%>>
+                        <%=f.submit%>
+                    <%end%>
+                </td>
+            </tr>
+            <% i += 1%>
+        <%end%>
+        </tbody>
+    </table>

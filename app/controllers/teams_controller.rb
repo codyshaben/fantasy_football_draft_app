@@ -13,6 +13,10 @@ class TeamsController < ApplicationController
         end
     end
 
+    def add_player
+      
+    end 
+
     private
 
     def team_params

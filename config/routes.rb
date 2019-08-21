@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   post '/login', to: "sessions#create"
   get '/logout', to: "sessions#destroy"
   post '/', to: "teams#create"
+
+  get '/players', to: 'teams#add_player'
   
   resources :teams, only: [:index, :create]
   resources :players, only: [:index]
