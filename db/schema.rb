@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_20_224254) do
+ActiveRecord::Schema.define(version: 2019_08_21_200010) do
 
   create_table "player_data", force: :cascade do |t|
     t.string "name"
@@ -24,26 +24,10 @@ ActiveRecord::Schema.define(version: 2019_08_20_224254) do
     t.integer "fg_m"
     t.integer "fg_att"
     t.string "a_m"
-    t.boolean "owned"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "players", force: :cascade do |t|
-    t.string "name"
-    t.integer "yards"
-    t.integer "touchdowns"
-    t.integer "rank"
-    t.string "position"
-    t.integer "comb"
-    t.float "sacks"
-    t.integer "intercepts"
-    t.integer "fg_m"
-    t.integer "fg_att"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "team_id"
-    t.index ["team_id"], name: "index_players_on_team_id"
+    t.index ["team_id"], name: "index_player_data_on_team_id"
   end
 
   create_table "teams", force: :cascade do |t|

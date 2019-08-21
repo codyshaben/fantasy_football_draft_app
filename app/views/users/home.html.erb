@@ -1,4 +1,10 @@
 <p>This is the home page</p>
 <div>
-<%= link_to "Teams", teams_path %><br>
+    <%= form_for :team do |f| %>
+        <%= f.text_field :create_team %>
+
+        <%= f.submit "Create new team" %>
+    <% end %>
+    <br>
+    <%= link_to "Teams", teams_path %><br>
 </div>
