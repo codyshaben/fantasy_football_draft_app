@@ -1,0 +1,7 @@
+<h1>Players</h1>
+
+<div>
+  <% @players.each do |player| %>
+    <p>Player: <%= player.team.name %>. Location:<%= player.location %>.</p>
+  <% end %>
+</div>

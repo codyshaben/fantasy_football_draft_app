@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FantasyFootballDraftApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <h1>Fantasy Football Draft Toolkit</h1>
+    <nav>
+      <div class='nav-list'>
+        <% if current_user %>
+          <%= link_to "Teams", teams_path %>
+          <%= link_to "Log Out", logout_path %>
+        <% else %>
+          <%= link_to "Sign Up", signup_path %>
+          <%= link_to "Log In", login_path %>
+        <% end %>
+      </div>
+    </nav>
+
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg.html_safe %>
+    <% end %>
+
+    <%= yield %>
+  </body>
+</html>
