@@ -15,6 +15,14 @@ class TeamsController < ApplicationController
     end
 
     def add_player
+        if params[:z]
+            @players = Team.filter_positions(params[:z])
+        else
+            @players = Team.top_100
+        end
+
+        @all_positions = Team.positionNameHash
+
         if params[:q]
             @team_id = params[:q]
         else
@@ -24,11 +32,12 @@ class TeamsController < ApplicationController
 
     def add_to_roster #params[:id] => player id || params[:team_id] => team id
         PlayerDatum.where(id: params[:id]).first.update(team_id: params[:team_id])
-        render :add_player
+        redirect_to '/players'
     end
 
-    def set_team
-        redirect_to controller: 'teams', action: 'add_player', q: params[:q]
+    def set_data
+        @all_positions = Team.positionNameHash
+        redirect_to controller: 'teams', action: 'add_player', q: params[:q], z: params[:z]
     end
 
     private

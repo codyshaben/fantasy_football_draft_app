@@ -1,13 +1,13 @@
 <h1><%= 'This is the add page' %></h1><br>
 
-<% ranked_players = PlayerDatum.order(rank: :asc) %>
-
-
 <%= form_tag("/players_team", method: "post") do %>
-  <%= label_tag(:q, "Pick Team To Add To:")%>
+  <%= label_tag(:q, "Pick Team To Add To: ")%>
   <%= select_tag(:q, options_from_collection_for_select(User.where(name: 'bill').first.teams, :id, :name))%>
-  <%= submit_tag("Submit", :id => :q)%>
+  <%= label_tag(:z, "Filter By Position: ")%>
+  <%= select_tag(:z, options_for_select(@all_positions.map{|a| [a[:name], a[:id]]}))%>
+  <%= submit_tag("Submit", :id => :q, :position_id => :z)%>
 <% end %>
+
 
 <style>
 
@@ -68,11 +68,12 @@ tr:nth-child(even) {
         <thead>
             <tr>
                 <th>#</th>
-                <th>Rank</th>
                 <th>Name</th>
                 <th>Position</th>
                 <th>Yards</th>
                 <th>Touchdowns</th>
+                <th>Interceptions</th>
+                <th>Sacks</th>
                 <th>Comb</th>
                 <th>FGM</th>
                 <th>FG Att</th>
@@ -81,21 +82,22 @@ tr:nth-child(even) {
             </tr>
         </thead>
         <tbody>
-        <%while i < 100%>
+        <%while i < @players.count%>
             <tr>
-                <td><%= i+1 %></td>       
-                <td class="sever"><%= ranked_players[i].rank %></td>       
-                <td><%= ranked_players[i].name %></td>
-                <td><%= ranked_players[i].position %></td>
-                <td><%= ranked_players[i].yards %></td>
-                <td><%= ranked_players[i].touchdowns %></td>           
-                <td><%= ranked_players[i].comb %></td>
-                <td><%= ranked_players[i].fg_m %></td>
-                <td><%= ranked_players[i].fg_att %></td> 
-                <td><%= ranked_players[i].a_m %></td>
+                <td><%= i+1 %></td>      
+                <td><%= @players[i].name %></td>
+                <td><%= @players[i].position %></td>
+                <td><%= @players[i].yards %></td>
+                <td><%= @players[i].touchdowns %></td>
+                <td><%= @players[i].intercepts %></td>
+                <td><%= @players[i].sacks %></td>          
+                <td><%= @players[i].comb %></td>
+                <td><%= @players[i].fg_m %></td>
+                <td><%= @players[i].fg_att %></td> 
+                <td><%= @players[i].a_m %></td>
                 <td>
                     <%=form_for :player do |f|%>
-                        <input type="hidden" name= "id" value=<%=ranked_players[i].id%>>
+                        <input type="hidden" name= "id" value=<%=@players[i].id%>>
                         <input type="hidden" name= "team_id" value=<%=@team_id%>>
                         <%=f.submit%>
                     <%end%>
