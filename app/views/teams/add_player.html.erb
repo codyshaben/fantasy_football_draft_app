@@ -68,11 +68,12 @@ tr:nth-child(even) {
         <thead>
             <tr>
                 <th>#</th>
-                <th>Rank</th>
                 <th>Name</th>
                 <th>Position</th>
                 <th>Yards</th>
                 <th>Touchdowns</th>
+                <th>Interceptions</th>
+                <th>Sacks</th>
                 <th>Comb</th>
                 <th>FGM</th>
                 <th>FG Att</th>
@@ -83,12 +84,13 @@ tr:nth-child(even) {
         <tbody>
         <%while i < @players.count%>
             <tr>
-                <td><%= i+1 %></td>
-                <td class="sever"><%= @players[i].rank %></td>       
+                <td><%= i+1 %></td>      
                 <td><%= @players[i].name %></td>
                 <td><%= @players[i].position %></td>
                 <td><%= @players[i].yards %></td>
-                <td><%= @players[i].touchdowns %></td>           
+                <td><%= @players[i].touchdowns %></td>
+                <td><%= @players[i].intercepts %></td>
+                <td><%= @players[i].sacks %></td>          
                 <td><%= @players[i].comb %></td>
                 <td><%= @players[i].fg_m %></td>
                 <td><%= @players[i].fg_att %></td> 

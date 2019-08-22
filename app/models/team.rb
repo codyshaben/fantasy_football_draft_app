@@ -3,7 +3,7 @@ class Team < ApplicationRecord
     has_many :player_data
 
 
-    def self.positionNameArray
+    def self.positionNameHash
         positions =  [{name: 'Quarterback', id: 0},
                      {name: 'Runningback', id: 1},
                      {name: 'Wide Receiver', id: 2},
@@ -26,7 +26,7 @@ class Team < ApplicationRecord
         ['DE', 'DT', 'NT'],
         ['OLB', 'ILB', 'MLB', 'LB'],
         ['FS', 'SS', 'DB', 'CB'],
-        ['DB', 'WR', 'RB', 'FS', 'CB', 'FB', 'TE'],
+        ['DB', 'WR', 'RB', 'FS', 'CB', 'FB'],
         ['WR', 'RB', 'CB'],
         ['K']]
 
@@ -37,19 +37,21 @@ class Team < ApplicationRecord
         symbolArray = Team.positionSymbols[index.to_i]
         playerArray = []
         symbolArray.each do |pos_sym|
-            playerArray.push(PlayerDatum.where(position: pos_sym))
+            PlayerDatum.where(team_id: nil).where(position: pos_sym).map {|player| playerArray << player}
         end
-        playerArray = playerArray.first
+
+        playerArray = playerArray.sort_by {|player| player[:rank]}
+
         if playerArray.count >= 100
-            playerArray = playerArray.shuffle[0..99]
+            playerArray = playerArray[0..99]
         else
-            playerArray = playerArray.shuffle[0..playerArray.length]
+            playerArray = playerArray[0..playerArray.length]
         end
 
         playerArray
     end
 
     def self.top_100
-        PlayerDatum.order(rank: :asc)[0..99]
+        PlayerDatum.where(team_id: nil).order(rank: :asc)[0..99]
     end
 end
