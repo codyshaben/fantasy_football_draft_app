@@ -39,6 +39,12 @@ class TeamsController < ApplicationController
         @all_positions = Team.positionNameHash
         redirect_to controller: 'teams', action: 'add_player', q: params[:q], z: params[:z]
     end
+    
+    def stats
+        @players_array = Team.all_stats
+        @categories = ['Sacks', 'Interceptions', 'Tackles', 'Yards', 'Touchdowns', 'Touchdowns', '50+ Made', 'Interceptions']
+        @cat_symbols = ['sacks', 'intercepts', 'comb', 'yards', 'touchdowns', 'touchdowns', 'a_m', 'intercepts']
+    end
 
     private
 

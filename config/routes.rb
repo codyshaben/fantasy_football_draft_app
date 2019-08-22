@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get '/players', to: 'teams#add_player'
   post '/players', to: 'teams#add_to_roster'
   post '/players_team', to: 'teams#set_data'
+
+  get '/stats', to: 'teams#stats'
   
   resources :teams, only: [:index, :create]
   resources :players, only: [:index]
