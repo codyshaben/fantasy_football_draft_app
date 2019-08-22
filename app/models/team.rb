@@ -55,4 +55,71 @@ class Team < ApplicationRecord
         PlayerDatum.where(team_id: nil).order(rank: :asc)[0..99]
     end
 
+    def self.most_defense
+        most = []
+        most << Team.filter_positions(5)
+        most << Team.filter_positions(6)
+        most << Team.filter_positions(7)
+        most.flatten
+    end
+
+    def self.most_sacks
+        Team.most_defense.sort_by {|player| player[:sacks]}.last
+    end
+
+    def self.most_intercepts
+        Team.most_defense.sort_by {|player| player[:intercepts]}.last
+    end
+
+    def self.most_comb
+        Team.most_defense.sort_by {|player| player[:comb]}.last
+    end
+
+    def self.most_def_td
+        Team.most_defense.sort_by {|player| [player[:touchdowns]]}.last
+    end
+
+    def self.most_offense
+        most = []
+        i = 0
+        while i < 4
+            most << Team.filter_positions(i)
+            i += 1
+        end
+        most.flatten
+    end
+
+    def self.most_yards
+        Team.most_offense.sort_by {|player| player[:yards]}.last
+    end
+
+    def self.most_off_td 
+        Team.most_offense.sort_by {|player| player[:touchdowns]}.last
+    end
+
+    def self.most_mixed
+        Team.filter_positions(9).sort_by {|player| player[:a_m]}.last
+    end
+
+    def self.least_intercepts
+        Team.filter_positions(0).sort_by {|player| player[:intercepts]}.first
+    end
+
+
+
+
+
+    
+    def self.all_stats
+        players = []
+        players << Team.most_sacks
+        players << Team.most_intercepts
+        players << Team.most_comb
+        players << Team.most_yards
+        players << Team.most_off_td
+        players << Team.most_def_td
+        players << Team.most_mixed
+        players << Team.least_intercepts
+        players.flatten
+    end
 end
