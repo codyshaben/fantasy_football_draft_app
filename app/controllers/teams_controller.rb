@@ -20,7 +20,13 @@ class TeamsController < ApplicationController
     end
 
     def destroy
-        
+        if current_user.teams.count > 1
+            Team.destroy(params[:team_id])
+            redirect_to '/teams'
+        else
+            flash[:alert] = "You shouldn't delete your only team!"
+            redirect_to '/teams'
+        end
     end
 
     def add_player
