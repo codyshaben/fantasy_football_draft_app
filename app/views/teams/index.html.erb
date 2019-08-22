@@ -1,11 +1,20 @@
+<%@teams.map do |team|%> 
+    <table style="float: left;" class="teams_container">
+      <h4>Title</h4>
+          <thead>
+              <tr>
+                  <th>Name</th>
+                  <th>Position</th>
+              </tr>
+          </thead>
+          <tbody>
+              <%team.player_data.map do |player|%>
+                <tr>
+                    <td><%= player.name %></td> 
+                    <td><%= player.position %></td>
+                </tr>
+              <%end%>
+          </tbody>
+    </table>
+<%end%>
 
-
-<section>
-  <h1>Your Teams</h1>
-  <ul>
-    <% @teams.each do |team| %>
-    <li><%= link_to team.name, players_path %></li>
-    <% end %>
-  </ul>
-
-</section>
