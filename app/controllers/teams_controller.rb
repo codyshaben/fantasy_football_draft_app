@@ -15,6 +15,12 @@ class TeamsController < ApplicationController
     end
 
     def add_player
+        if params[:z]
+            @players = Team.filter_positions(params[:z])
+        else
+            @players = Team.top_100
+        end
+        @all_positions = Team.positionNameArray
         if params[:q]
             @team_id = params[:q]
         else
@@ -27,8 +33,8 @@ class TeamsController < ApplicationController
         render :add_player
     end
 
-    def set_team
-        redirect_to controller: 'teams', action: 'add_player', q: params[:q]
+    def set_data
+        redirect_to controller: 'teams', action: 'add_player', q: params[:q], z: params[:z]
     end
 
     private
