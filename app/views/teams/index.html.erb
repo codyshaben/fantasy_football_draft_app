@@ -1,8 +1,11 @@
-<h1>Your Teams</h1>
 
-<div>
-<% @teams.each do |team| %>
-  <p><%= link_to team.name, players_path %></p>
-<% end %>
 
-</div>
+<section>
+  <h1>Your Teams</h1>
+  <ul>
+    <% @teams.each do |team| %>
+    <li><%= link_to team.name, players_path %></li>
+    <% end %>
+  </ul>
+
+</section>

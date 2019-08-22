@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
 
     def destroy
         session[:user_id] = nil
-        redirect_to teams_path
+        redirect_to '/login'
     end
 
 end
