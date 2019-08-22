@@ -1,0 +1,9 @@
+<div class="new_team-container">
+    <%= form_for @team do |f| %>
+        <p><%= f.label :team_name %></p>
+        <p><%= f.text_field :name %></p>
+
+        <%= f.submit "Add Team" %>
+    
+    <% end %>
+</div>

@@ -1,20 +1,26 @@
-<% @teams.map do |team| %> 
-    <table style="float: left;" class="teams_container">
-      <h4>Title</h4>
-          <thead>
+ <div class="roster-container" >
+  <% @teams.map do |team| %> 
+      <table class="teams_container">
+            <thead>
+              <th><%= team.name %></th>
+              <th><%=form_for :team do |f|%>
+                <input type="hidden" name= "team_id" value=<%=team.id%>>
+                <input type="submit" value="Delete Team">                
+            <%end%>  </th>
+            </thead>
+            <tbody>
               <tr>
-                  <th>Name</th>
-                  <th>Position</th>
+                <th>Name</th>
+                <th>Position</th>
               </tr>
-          </thead>
-          <tbody>
-              <% team.player_data.map do |player| %>
-                <tr>
-                    <td><%= player.name %></td> 
-                    <td><%= player.position %></td>
-                </tr>
-              <%end%>
-          </tbody>
-    </table>
-<%end%>
 
+                <%team.player_data.map do |player|%>
+                  <tr>
+                      <td><%= player.name %></td> 
+                      <td><%= player.position %></td>
+                  </tr>
+                <%end%>
+            </tbody>
+      </table>
+  <%end%>
+</div>

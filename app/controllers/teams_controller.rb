@@ -1,17 +1,26 @@
 class TeamsController < ApplicationController
 
     def index
-        @teams = Team.all
+        @teams = User.where(id: current_user.id).first.teams
+    end
+
+    def new
+        @team = Team.new
     end
     
     def create
         @team = Team.new(team_params)
-
+        
+        @team.user_id = current_user.id
         if (@team.save)
-            redirect_to teams_path
+            redirect_to '/teams'
         else
-            render :index
+            render :new
         end
+    end
+
+    def destroy
+        
     end
 
     def add_player
@@ -49,6 +58,6 @@ class TeamsController < ApplicationController
     private
 
     def team_params
-        params.require(:team).permit(:name, :user_id)
+        params.require(:team).permit(:name)
     end
 end
