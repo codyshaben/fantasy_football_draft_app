@@ -7,9 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require_relative './scraper'
 
-User.destroy_all
 Team.destroy_all
 PlayerDatum.destroy_all
+
+bill = User.where(name: "bill").first
+Team.create(name: "Bills", user_id: bill.id)
+Team.create(name: "Not Bills", user_id: bill.id)
+
 
 def parseScrape(url, extra=nil)
     statNames = ['Player', 'Yds', 'TD', 'Rk', 'Pos', 'Comb', 'Sck', 'Int', 'FGM', 'FG Att', 'A-M']

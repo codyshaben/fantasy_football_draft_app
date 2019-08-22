@@ -2,6 +2,13 @@
 
 <% ranked_players = PlayerDatum.order(rank: :asc) %>
 
+
+<%= form_tag("/players_team", method: "post") do %>
+  <%= label_tag(:q, "Pick Team To Add To:")%>
+  <%= select_tag(:q, options_from_collection_for_select(User.where(name: 'bill').first.teams, :id, :name))%>
+  <%= submit_tag("Submit", :id => :q)%>
+<% end %>
+
 <style>
 
 th {
@@ -89,6 +96,7 @@ tr:nth-child(even) {
                 <td>
                     <%=form_for :player do |f|%>
                         <input type="hidden" name= "id" value=<%=ranked_players[i].id%>>
+                        <input type="hidden" name= "team_id" value=<%=@team_id%>>
                         <%=f.submit%>
                     <%end%>
                 </td>
