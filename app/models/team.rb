@@ -54,4 +54,5 @@ class Team < ApplicationRecord
     def self.top_100
         PlayerDatum.where(team_id: nil).order(rank: :asc)[0..99]
     end
+
 end
