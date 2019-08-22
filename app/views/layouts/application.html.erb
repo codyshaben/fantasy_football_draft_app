@@ -13,21 +13,24 @@
   <header>Fantasy Football Draft Toolkit</header>
   <body>
     <nav>
-      <div class='nav-list'>
+      <ul>
         <% if current_user %>
-          <%= link_to "Log Out", logout_path %><br>
-          <%= link_to "Back", :back, class: "btn btn-sm btn-default" %>
+          <p><%= link_to "Log Out", logout_path %></p>
+          <p><%= link_to "Back", :back, class: "btn btn-sm btn-default" %></p>
         <% else %>
-          <%= link_to "Sign Up", signup_path %><br>
-          <%= link_to "Log In", login_path %><br>
-          <%= link_to "Back", :back, class: "btn btn-sm btn-default" %>
+          <p><%= link_to "Sign Up", signup_path %></p>
+          <p><%= link_to "Log In", login_path %></p>
+          <p><%= link_to "Back", :back, class: "btn btn-sm btn-default" %></p>
         <% end %>
-      </div>
+      </ul>
     </nav>
 
-    <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg.html_safe %>
-    <% end %>
+    <strong>
+      <% flash.each do |name, msg| %>
+       <%= content_tag :div, msg.html_safe %>
+      <% end %>
+    </strong>
+
 
     <%= yield %>
   </body>
