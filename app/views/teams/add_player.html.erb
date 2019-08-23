@@ -1,12 +1,14 @@
-<h1><%= 'This is the add page' %></h1><br>
+<h2><%= 'Choose players to save to your draft board' %></h2><br>
 
-<%= form_tag("/players_team", method: "post") do %>
-  <%= label_tag(:q, "Pick Team To Add To: ")%>
-  <%= select_tag(:q, options_from_collection_for_select(User.where(name: 'bill').first.teams, :id, :name))%>
-  <%= label_tag(:z, "Filter By Position: ")%>
-  <%= select_tag(:z, options_for_select(@all_positions.map{|a| [a[:name], a[:id]]}))%>
-  <%= submit_tag("Submit", :id => :q, :position_id => :z)%>
-<% end %>
+<div class="add_players-container">
+    <%= form_tag("/players_team", method: "post") do %>
+      <%= label_tag(:q, "Pick Team To Add To: ")%>
+      <%= select_tag(:q, options_from_collection_for_select(User.where(name: 'bill').first.teams, :id, :name))%><br>
+      <%= label_tag(:z, "Filter By Position: ")%>
+      <%= select_tag(:z, options_for_select(@all_positions.map{|a| [a[:name], a[:id]]}))%>
+      <%= submit_tag("Submit", :id => :q, :position_id => :z)%>
+    <% end %>
+</div>
 
 
 <style>
@@ -40,7 +42,7 @@ tr:nth-child(even) {
 }
 
 .container th, .container td {
-    padding: 12px 15px;
+    padding: 10px 10px;
 }
 
 .container tbody tr {
