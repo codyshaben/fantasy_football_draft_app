@@ -76,7 +76,7 @@ class Team < ApplicationRecord
     end
 
     def self.most_def_td
-        Team.most_defense.sort_by {|player| [player[:touchdowns]]}.last
+        Team.most_defense.sort_by {|player| [player[:touchdowns]]}.first
     end
 
     def self.most_offense
@@ -87,6 +87,14 @@ class Team < ApplicationRecord
             i += 1
         end
         most.flatten
+    end
+
+    def self.most_fg_made
+        Team.filter_positions(9).sort_by {|player| player[:fg_m]}.last
+    end
+
+    def self.most_fg_att
+        Team.filter_positions(9).sort_by {|player| player[:fg_att]}.last
     end
 
     def self.most_yards
@@ -105,6 +113,25 @@ class Team < ApplicationRecord
         Team.filter_positions(0).sort_by {|player| player[:intercepts]}.first
     end
 
+    def self.mvp
+        PlayerDatum.order(rank: :asc).first
+    end
+
+    def self.longest_name
+        player = ''
+        PlayerDatum.all.map {|a| player = a.name  if player.length <= a.name.length}
+        retPlay = PlayerDatum.where(name: player).first
+        retPlay
+    end
+
+    def self.shortest_name
+        player = '1234567890123456789'
+        PlayerDatum.all.map {|a| player = a.name if player.length >= a.name.length}
+        retPlay = PlayerDatum.where(name: player).first
+        retPlay
+    end
+    
+
 
 
 
@@ -120,6 +147,11 @@ class Team < ApplicationRecord
         players << Team.most_def_td
         players << Team.most_mixed
         players << Team.least_intercepts
+        players << Team.most_fg_att
+        players << Team.most_fg_made
+        players << Team.mvp
+        players << Team.longest_name
+        players << Team.shortest_name
         players.flatten
     end
 end

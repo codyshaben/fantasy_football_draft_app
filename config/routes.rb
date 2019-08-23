@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   post '/', to: 'teams#destroy'
 
-  get '/stats', to: 'teams#stats'
+  get '/stats', to: 'stats#stats'
   
   resources :teams, only: [:index, :create]
   resources :players, only: [:index]
