@@ -4,12 +4,15 @@
     <table class="teams_container">
         <thead>
             <tr>
+                <th><%=@headers[index]%></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
                 <th>Name</th>
                 <th>Position</th>
                 <th><%=@categories[index]%></th>
             </tr>
-        </thead>
-        <tbody>
             <tr>
                 <td><%=player.name%></td>
                 <td><%=player.position%></td>

@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   def new
+    if current_user
+      redirect_to '/teams'
+    end
     @user = User.new
   end
 

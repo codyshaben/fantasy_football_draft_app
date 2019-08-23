@@ -1,11 +1,19 @@
 class TeamsController < ApplicationController
 
     def index
-        @teams = User.where(id: current_user.id).first.teams
+        if current_user == nil
+            render file: 'public/404.html'
+        else
+            @teams = User.where(id: current_user.id).first.teams
+        end
     end
 
     def new
-        @team = Team.new
+        if current_user == nil
+            render file: 'public/404.html'
+        else
+            @team = Team.new
+        end
     end
     
     def create
@@ -21,6 +29,7 @@ class TeamsController < ApplicationController
 
     def destroy
         if current_user.teams.count > 1
+            PlayerDatum.where(team_id: params[:team_id]).map {|player| player.update(team_id: nil)}
             Team.destroy(params[:team_id])
             redirect_to '/teams'
         else
@@ -30,18 +39,22 @@ class TeamsController < ApplicationController
     end
 
     def add_player
-        if params[:z]
-            @players = Team.filter_positions(params[:z])
+        if current_user == nil
+            render file: 'public/404.html'
         else
-            @players = Team.top_100
-        end
+            if params[:z]
+                @players = Team.filter_positions(params[:z])
+            else
+                @players = Team.top_100
+            end
 
-        @all_positions = Team.positionNameHash
+            @all_positions = Team.positionNameHash
 
-        if params[:q]
-            @team_id = params[:q]
-        else
-            @team_id = current_user.teams.first.id
+            if params[:q]
+                @team_id = params[:q]
+            else
+                @team_id = current_user.teams.first.id
+            end
         end
     end 
 
@@ -56,9 +69,14 @@ class TeamsController < ApplicationController
     end
     
     def stats
-        @players_array = Team.all_stats
-        @categories = ['Sacks', 'Interceptions', 'Tackles', 'Yards', 'Touchdowns', 'Touchdowns', '50+ Made', 'Interceptions']
-        @cat_symbols = ['sacks', 'intercepts', 'comb', 'yards', 'touchdowns', 'touchdowns', 'a_m', 'intercepts']
+        if current_user == nil
+            render file: 'public/404.html'
+        else
+            @players_array = Team.all_stats
+            @categories = ['Sacks', 'Interceptions', 'Tackles', 'Yards', 'Touchdowns', 'Touchdowns', '50+ Made', 'Interceptions']
+            @cat_symbols = ['sacks', 'intercepts', 'comb', 'yards', 'touchdowns', 'touchdowns', 'a_m', 'intercepts']
+            @headers = ['Most Sacks', 'Most Interceptions', 'Most Tackles', 'Most Yards', 'Most Touchdowns', 'Least Touchdowns', 'Most FG Made at 50+ Yards', 'Least Interceptions']
+        end
     end
 
     private
