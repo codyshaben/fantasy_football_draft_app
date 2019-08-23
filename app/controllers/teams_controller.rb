@@ -1,11 +1,19 @@
 class TeamsController < ApplicationController
 
     def index
-        @teams = User.where(id: current_user.id).first.teams
+        if current_user == nil
+            render file: 'public/404.html'
+        else
+            @teams = User.where(id: current_user.id).first.teams
+        end
     end
 
     def new
-        @team = Team.new
+        if current_user == nil
+            render file: 'public/404.html'
+        else
+            @team = Team.new
+        end
     end
     
     def create
@@ -21,6 +29,7 @@ class TeamsController < ApplicationController
 
     def destroy
         if current_user.teams.count > 1
+            PlayerDatum.where(team_id: params[:team_id]).map {|player| player.update(team_id: nil)}
             Team.destroy(params[:team_id])
             redirect_to '/teams'
         else
@@ -30,35 +39,50 @@ class TeamsController < ApplicationController
     end
 
     def add_player
-        if params[:z]
-            @players = Team.filter_positions(params[:z])
+        if current_user == nil
+            render file: 'public/404.html'
         else
-            @players = Team.top_100
-        end
+            if params[:z]
+                @players = Team.filter_positions(params[:z])
+            else
+                @players = Team.top_100
+            end
 
-        @all_positions = Team.positionNameHash
+            @all_positions = Team.positionNameHash
 
-        if params[:q]
-            @team_id = params[:q]
-        else
-            @team_id = current_user.teams.first.id
+
+            if params[:q]
+                @team_id = params[:q]
+            else
+                @team_id = current_user.teams.first.id
+            end
         end
     end 
 
     def add_to_roster #params[:id] => player id || params[:team_id] => team id
         PlayerDatum.where(id: params[:id]).first.update(team_id: params[:team_id])
-        redirect_to '/players'
+        redirect_to controller: 'teams', action: 'add_player', q: params[:q], z: params[:z]
     end
 
     def set_data
         @all_positions = Team.positionNameHash
         redirect_to controller: 'teams', action: 'add_player', q: params[:q], z: params[:z]
     end
+
+    def delete_from_roster
+        PlayerDatum.where(id: params[:player_id].to_i).update(team_id: nil)
+        redirect_to '/teams'
+    end
     
     def stats
-        @players_array = Team.all_stats
-        @categories = ['Sacks', 'Interceptions', 'Tackles', 'Yards', 'Touchdowns', 'Touchdowns', '50+ Made', 'Interceptions']
-        @cat_symbols = ['sacks', 'intercepts', 'comb', 'yards', 'touchdowns', 'touchdowns', 'a_m', 'intercepts']
+        if current_user == nil
+            render file: 'public/404.html'
+        else
+            @players_array = Team.all_stats
+            @categories = ['Sacks', 'Interceptions', 'Tackles', 'Yards', 'Touchdowns', 'Touchdowns', '50+ Made', 'Interceptions']
+            @cat_symbols = ['sacks', 'intercepts', 'comb', 'yards', 'touchdowns', 'touchdowns', 'a_m', 'intercepts']
+            @headers = ['Most Sacks', 'Most Interceptions', 'Most Tackles', 'Most Yards', 'Most Touchdowns', 'Least Touchdowns', 'Most FG Made at 50+ Yards', 'Least Interceptions']
+        end
     end
 
     private

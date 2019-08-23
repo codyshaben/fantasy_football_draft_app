@@ -1,7 +1,9 @@
 class SessionsController < ApplicationController
    
     def new
-        
+        if current_user
+            redirect_to '/teams'
+        end
     end
 
     def create
