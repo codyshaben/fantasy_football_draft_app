@@ -19,6 +19,8 @@
 6. If you enter a username that already exists, an error will pop up that reads "Username already exists."
 7. After you successfully create an account or log in, you will be re-directed to your teams page and a success message will pop up that reads "User has been successfully created!"
 
+![Teams](https://github.com/codyshaben/fantasy_football_draft_app/blob/master/Screen%20Shot%202019-08-23%20at%2012.16.58%20PM.png)
+
 ## Teams 
 1. Once on your teams page, a team is automatically created for you.
 2. Your team name is located on the top left of your teams table.
