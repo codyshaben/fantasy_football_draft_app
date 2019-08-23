@@ -81,7 +81,7 @@ class TeamsController < ApplicationController
             @players_array = Team.all_stats
             @categories = ['Sacks', 'Interceptions', 'Tackles', 'Yards', 'Touchdowns', 'Touchdowns', '50+ Made', 'Interceptions']
             @cat_symbols = ['sacks', 'intercepts', 'comb', 'yards', 'touchdowns', 'touchdowns', 'a_m', 'intercepts']
-            @headers = ['Most Sacks', 'Most Interceptions', 'Most Tackles', 'Most Yards', 'Most Touchdowns', 'Least Touchdowns', 'Most FG Made at 50+ Yards', 'Least Interceptions']
+            @headers = ['Most Sacks', 'Most Interceptions', 'Most Tackles', 'Most Yards', 'Most Touchdowns', 'Least Touchdowns', '50+ Yard FGs Made', 'Least Interceptions']
         end
     end
 

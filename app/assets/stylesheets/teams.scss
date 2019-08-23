@@ -24,14 +24,14 @@ tr:nth-child(even) {
 
 .teams_container {
     margin: 5px;
-    min-width: 550px;
+    min-width: 600px;
     border-collapse: collapse;
     font-size: 1.3em;
     text-align: left;
     border-radius: 10px 10px 10px 10px;
     overflow: hidden;
+    opacity: 0.9;
 }
-
 
 .teams_container thead tr{
     background-color: lightblue;
@@ -41,7 +41,9 @@ tr:nth-child(even) {
 }
 
 .teams_container th, .teams_container td {
-    padding: 10px 12px;
+    padding: 6px 40px 6px 10px;
+    width: 240px;
+ 
 }
 
 .teams_container tbody tr {
@@ -83,3 +85,5 @@ tr:nth-child(even) {
     border-radius: 20px 20px 20px 20px;
     opacity: 0.85
 }
+
+
