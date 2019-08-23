@@ -8,7 +8,13 @@
                 <input type="submit" value="Delete Team">                
             <%end%>  
             </th>
-            <th></th>
+              <th>
+                <%=form_tag({controller: 'teams', action: 'rename_team', method: 'post'}) do%>
+                  <input type='text-field' name='team_name'>
+                  <input type='hidden' name='team_id', value=<%=team.id%>>
+                  <input type='submit' value='Rename Team'>
+                <%end%>
+              </th>
             </thead>
             <tbody>
               <tr>
