@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post '/login', to: "sessions#create"
   get '/logout', to: "sessions#destroy"
   get '/index123', to: 'players#index'
+  post '/delete_player_from_roster', to: 'teams#delete_from_roster'
 
   get '/players', to: 'teams#add_player'
   post '/players', to: 'teams#add_to_roster'

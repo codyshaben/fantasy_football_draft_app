@@ -6,18 +6,27 @@
               <th><%=form_for :team do |f|%>
                 <input type="hidden" name= "team_id" value=<%=team.id%>>
                 <input type="submit" value="Delete Team">                
-            <%end%>  </th>
+            <%end%>  
+            </th>
+            <th></th>
             </thead>
             <tbody>
               <tr>
                 <th>Name</th>
                 <th>Position</th>
+                <th>Delete Player</th>
               </tr>
 
                 <%team.player_data.map do |player|%>
                   <tr>
                       <td><%= player.name %></td> 
                       <td><%= player.position %></td>
+                      <td>
+                        <%=form_tag({controller: 'teams', action: 'delete_from_roster', method: 'post'}) do%>
+                          <input type='hidden' name='player_id' value=<%=player.id%>>
+                          <input type='submit' value='delete'>
+                        <%end%>
+                      </td>
                   </tr>
                 <%end%>
             </tbody>
