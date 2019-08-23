@@ -1,4 +1,6 @@
-# README
+# Enter the Fantasy Football War Room
+
+![login](https://github.com/codyshaben/fantasy_football_draft_app/blob/master/Screen%20Shot%202019-08-23%20at%2011.05.57%20AM.png)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
