@@ -73,6 +73,11 @@ class TeamsController < ApplicationController
         PlayerDatum.where(id: params[:player_id].to_i).update(team_id: nil)
         redirect_to '/teams'
     end
+
+    def rename_team
+        Team.where(id: params[:team_id]).update(name: params[:team_name])
+        redirect_to '/teams'
+    end
     
     def stats
         if current_user == nil
