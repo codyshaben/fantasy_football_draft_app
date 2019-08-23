@@ -83,17 +83,6 @@ class TeamsController < ApplicationController
         Team.where(id: params[:team_id]).update(name: params[:team_name])
         redirect_to '/teams'
     end
-    
-    def stats
-        if current_user == nil
-            render file: 'public/404.html'
-        else
-            @players_array = Team.all_stats
-            @categories = ['Sacks', 'Interceptions', 'Tackles', 'Yards', 'Touchdowns', 'Touchdowns', '50+ Made', 'Interceptions']
-            @cat_symbols = ['sacks', 'intercepts', 'comb', 'yards', 'touchdowns', 'touchdowns', 'a_m', 'intercepts']
-            @headers = ['Most Sacks', 'Most Interceptions', 'Most Tackles', 'Most Yards', 'Most Touchdowns', 'Least Touchdowns', '50+ Yard FGs Made', 'Least Interceptions']
-        end
-    end
 
     private
 
