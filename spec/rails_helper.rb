@@ -5,6 +5,8 @@ require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
+require 'capybara/rspec'
+require 'rspec/autorun'
 require 'pry'
 require 'database_cleaner'
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -52,6 +54,10 @@ RSpec.configure do |config|
   config.after :each do
     DatabaseCleaner.clean
   end
+
+  config.include Rails.application.routes.url_helpers
+
+  config.include Capybara::DSL
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
