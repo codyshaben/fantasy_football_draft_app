@@ -1,3 +1,30 @@
 // Place all the styles related to the players controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+th {
+    font-size: 22px;
+    font-family: Copperplate;
+}
+
+td {
+    font-size: 16px;
+    font-family: Copperplate;
+}
+
+.add_players-container {
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Copperplate;
+    background-color: gray;
+    height: 25px;
+    padding: 30px;
+    box-shadow: 
+        inset 0 0 0 1px rgba(53,86,129, 0.4), 
+        inset 0 0 5px rgba(53,86,129, 0.5),
+        inset 0px 10px 35px 10px white;
+    border-radius: 5px 5px 5px 5px;
+    opacity: 0.60;
+    margin-bottom: 10px;
+}

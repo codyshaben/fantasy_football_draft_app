@@ -1,6 +1,6 @@
 
 
-<%@players_array.each_with_index do |player, index|%>
+<% @players_array.each_with_index do |player, index| %>
     <table class="teams_container">
         <thead>
             <tr>
@@ -16,9 +16,9 @@
                 <th><%=@categories[index]%></th>
             </tr>
             <tr>
-                <td><%=player.name%></td>
-                <td><%=player.position%></td>
-                <td><%=player[@cat_symbols[index].to_sym]%></td>
+                <td><%= player.name %></td>
+                <td><%= player.position %></td>
+                <td><%= player[@cat_symbols[index].to_sym] %></td>
             </tr>
         </tbody>
     <table>
